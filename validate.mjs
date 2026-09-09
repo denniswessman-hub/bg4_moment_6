@@ -3,7 +3,7 @@ import path from "node:path";
 import { fileURLToPath } from "node:url";
 
 const projectDir = path.dirname(fileURLToPath(import.meta.url));
-const required = ["index.html", "styles.css", "app.js", "speaker-notes.js", "service-worker.js", "README.md", ".nojekyll"];
+const required = ["index.html", "styles.css", "app.js", "speaker-notes.js", "curriculum.js", "service-worker.js", "README.md", ".nojekyll"];
 const failures = [];
 
 for (const name of required) {
@@ -14,7 +14,7 @@ const textFiles = required.filter(name => name !== ".nojekyll");
 const contents = Object.fromEntries(textFiles.map(name => [name, fs.readFileSync(path.join(projectDir, name), "utf8")]));
 
 if (!contents["index.html"].includes('lang="sv"')) failures.push("HTML-språk saknas");
-if (!contents["index.html"].includes('data-version="1.1.0"')) failures.push("Versionsmarkör saknas");
+if (!contents["index.html"].includes('data-version="1.2.0"')) failures.push("Versionsmarkör saknas");
 if ((contents["index.html"].match(/class="slide(?:\s|\")/g) || []).length !== 10) failures.push("Fel antal presentationsbilder");
 if (!contents["index.html"].includes("Rättsligt underlag")) failures.push("Källpanel saknas");
 if (!contents["index.html"].includes("presenterDashboard")) failures.push("Presentatörsläge saknas");

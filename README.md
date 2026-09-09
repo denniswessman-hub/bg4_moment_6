@@ -4,8 +4,8 @@ En mobilanpassad klassrumspresentation för Moment 6, Basgrupp 4. Webbplatsen ä
 
 ## Innehåll
 
-- tio presentationsbilder med tydlig navigering
-- två beslutssituationer för klassen
+- fjorton steg för seminarieredovisningen och en frivillig repetitionsövning
+- hela lagtexten i 5 och 7 §§, öppningsbara ordförklaringar och förarbeten
 - stegvis genomgång av 5 och 7 §§ trafikbrottslagen
 - praxisjämförelse
 - interaktiv bevisutmaning
@@ -23,7 +23,7 @@ Webbplatsen kan öppnas genom att dubbelklicka på `index.html`. För att testa 
 - `Vänsterpil` eller `Page Up`: föregående bild
 - `F`: helskärm
 - `S`: källor
-- `R`: återställ interaktionen på aktuell bild
+- `R`: återställ alla svar och öppnade förklaringar
 
 Knappen **Talmanus** öppnar ett separat presentatörsfönster. Lägg huvudfönstret på projektorn och behåll talmanusfönstret på den egna skärmen. Fönstren synkroniseras när de har samma webbadress och webbläsarprofil.
 
@@ -44,7 +44,9 @@ Den ursprungliga PowerPoint-filen ingår inte i webbpaketet och förblir oförä
 
 ## Versionsuppgift
 
-Version 1.1.0
+Version 1.2.0
+
+Seminarieversion: 14 ordinarie steg och en frivillig bevisövning. Hela 5 och 7 §§ följs av öppningsbara ordförklaringar, syfte/förarbeten och rättsfall. Talmanuset följer den nya ordningen. Planera preliminärt 18–22 minuter plus eventuell repetition och anpassa till lärarens tidsram. Uppgiften anger ingen tidsgräns. Den äldre uppgiften om cirka 11 minuter gäller föregående version.
 
 Basgrupp 4: Johan Stensson, Fredrik Karlsson, Vegard Lein och Dennis Vessman.
 

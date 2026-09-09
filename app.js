@@ -263,6 +263,7 @@
     updateRequisites();
     document.querySelectorAll('.step-card, .case-reveal').forEach(item => item.setAttribute('aria-expanded', 'false'));
     resetQuiz();
+    document.querySelectorAll('details').forEach(item => { item.open = false; });
     if (notify) {
       const message = { type: 'reset', sender: sessionId, time: Date.now() };
       channel?.postMessage(message);

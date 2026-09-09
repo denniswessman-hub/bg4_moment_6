@@ -1,6 +1,6 @@
 const CACHE_PREFIX = `tbl-5-7:${self.registration.scope}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v1.1.0`;
-const CORE_FILES = ["./", "./index.html", "./styles.css", "./speaker-notes.js", "./app.js"];
+const CACHE_NAME = `${CACHE_PREFIX}v1.2.0`;
+const CORE_FILES = ["./", "./index.html", "./styles.css", "./speaker-notes.js", "./curriculum.js", "./app.js"];
 
 self.addEventListener("install", event => {
   event.waitUntil(caches.open(CACHE_NAME).then(cache => cache.addAll(CORE_FILES)));

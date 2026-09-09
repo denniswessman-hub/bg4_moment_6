@@ -518,6 +518,15 @@ p { line-height: 1.55; }
 .timer button { padding: .5rem .75rem; }
 
 .handout { display: none; }
+.lesson h2 { font-size: clamp(1.8rem, 3.5vw, 3.4rem); max-width: none; }
+.law-text { background: white; padding: 1.2rem 1.6rem; border-left: 5px solid var(--five); font-size: clamp(1rem, 1.45vw, 1.35rem); line-height: 1.55; }
+.law-text p:first-child { margin-top: 0; }
+.word-grid { display: grid; grid-template-columns: repeat(2,minmax(0,1fr)); gap: 1rem; }
+.word-grid details, .word-grid article { padding: 1.2rem; background: white; border: 1px solid var(--line); border-radius: .7rem; }
+.word-grid summary { cursor: pointer; font-weight: 800; font-size: 1.12rem; }
+.word-grid p { line-height: 1.6; }
+.source-inline a { color: var(--five-dark); overflow-wrap: anywhere; }
+@media (max-width: 700px) { .word-grid { grid-template-columns: 1fr; } }
 
 @media (max-width: 900px) {
   .topbar { height: 3.75rem; }
