@@ -51,3 +51,6 @@ Seminarieversion: 14 ordinarie steg och en frivillig bevisövning. Hela 5 och 7 
 Basgrupp 4: Johan Stensson, Fredrik Karlsson, Vegard Lein och Dennis Vessman.
 
 Återställ svar återställer samtliga frågor, poäng, facit och öppnade förklaringar utan att byta bild. Knappen finns även i talmanusfönstret. R gör samma sak. Börja om återställer svaren och går till startbilden. Talmanuset har tidsförslag, muntliga formuleringar och separata instruktioner för varje bild. Avsätt cirka 11 minuter, längre vid diskussion.
+# Version 1.3.0
+
+Förstasidan använder BG4–OLDBOYS-bilden. Vid hela lagtexten för 7 § finns en utfällbar förklaring av PL 24 a–24 d §§, med källa och talstöd. Hänvisningen hör till 7 §, inte 5 §. Bilden ingår i offline-stödet.
