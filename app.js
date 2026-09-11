@@ -288,6 +288,39 @@
   nextButton.addEventListener("click", () => move(1));
 
   document.getElementById("sourcesButton").addEventListener("click", () => sourceDialog.showModal());
+  const sourceHandle = sourceDialog.querySelector('.dialog-head');
+  sourceHandle.title = 'Dra här för att flytta källrutan';
+  let sourceDrag = null;
+  sourceHandle.addEventListener('pointerdown', event => {
+    if (event.button !== 0 || event.target.closest('button, a')) return;
+    const box = sourceDialog.getBoundingClientRect();
+    sourceDrag = { x: event.clientX, y: event.clientY, left: box.left, top: box.top };
+    sourceHandle.setPointerCapture(event.pointerId);
+    sourceHandle.classList.add('is-dragging');
+    event.preventDefault();
+  });
+  sourceHandle.addEventListener('pointermove', event => {
+    if (!sourceDrag) return;
+    const box = sourceDialog.getBoundingClientRect();
+    sourceDialog.style.margin = '0';
+    sourceDialog.style.left = `${Math.max(0, Math.min(innerWidth - box.width, sourceDrag.left + event.clientX - sourceDrag.x))}px`;
+    sourceDialog.style.top = `${Math.max(0, Math.min(innerHeight - box.height, sourceDrag.top + event.clientY - sourceDrag.y))}px`;
+  });
+  const stopSourceDrag = () => {
+    sourceDrag = null;
+    sourceHandle.classList.remove('is-dragging');
+  };
+  sourceHandle.addEventListener('pointerup', stopSourceDrag);
+  sourceHandle.addEventListener('pointercancel', stopSourceDrag);
+  sourceHandle.addEventListener('lostpointercapture', stopSourceDrag);
+  const resetSourcePosition = () => {
+    stopSourceDrag();
+    sourceDialog.style.margin = '';
+    sourceDialog.style.left = '';
+    sourceDialog.style.top = '';
+  };
+  sourceDialog.addEventListener('close', resetSourcePosition);
+  window.addEventListener('resize', resetSourcePosition);
   document.querySelector("[data-dialog-close]").addEventListener("click", () => sourceDialog.close());
   sourceDialog.addEventListener("click", event => {
     if (event.target === sourceDialog) sourceDialog.close();

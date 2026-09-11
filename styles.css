@@ -485,6 +485,8 @@ p { line-height: 1.55; }
 
 .source-dialog::backdrop { background: rgba(3, 12, 23, .78); backdrop-filter: blur(3px); }
 .dialog-head { position: sticky; z-index: 2; top: 0; display: flex; justify-content: space-between; gap: 1rem; align-items: center; padding: 1.25rem 1.5rem; background: var(--navy); color: white; }
+.dialog-head { cursor: grab; touch-action: none; user-select: none; }
+.dialog-head.is-dragging { cursor: grabbing; }
 .dialog-head .eyebrow { margin-bottom: .2rem; color: #8bc5ff; }
 .dialog-head h2 { margin: 0; font-size: clamp(1.6rem, 3vw, 2.4rem); }
 .source-status { margin: 1.5rem; padding: 1rem; border-left: .3rem solid var(--seven); background: var(--seven-soft); }
