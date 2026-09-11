@@ -171,6 +171,10 @@
   ];
 
   let quizIndex = 0;
+  const classQuizDialog = document.getElementById('classQuizDialog');
+  document.getElementById('classQuizButton').addEventListener('click', () => classQuizDialog.showModal());
+  document.getElementById('classQuizClose').addEventListener('click', () => classQuizDialog.close());
+  document.getElementById('classQuizReset').addEventListener('click', () => resetQuiz());
   let quizScore = 0;
   let quizAnswered = false;
   const evidencePrompt = document.getElementById("evidencePrompt");
@@ -448,7 +452,7 @@
 
   document.addEventListener("keydown", event => {
     if (event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input, textarea, select, [contenteditable]')) return;
-    if (sourceDialog.open) return;
+    if (sourceDialog.open || classQuizDialog.open) return;
     const interactive = event.target.closest("button, a, input, select, textarea");
     if (interactive && (event.key === " " || event.key === "Enter")) return;
 

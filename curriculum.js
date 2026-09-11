@@ -48,6 +48,8 @@
  window.speakerNotes[10][2] = 'Presentera omständigheterna och visa sedan utgången i varje fall. Länkarna leder till sidorna 23 respektive 24 i Åklagarmyndighetens vägledning, där domarna sammanfattas. Det är hovrättsfall, inte HD-prejudikat.';
  original[8].dataset.title = 'Frivillig bevisutmaning';
  original[8].querySelector('.eyebrow').textContent = 'Frivillig repetition efter redovisningen';
+ document.getElementById('classQuizContent').append(original[8].querySelector('.slide-content'));
+ window.speakerNotes[11][2] = 'Sammanfatta och klicka på Testa klassen. Låt klassen välja 5 §, 7 § eller båda för de sju uppgifterna. Diskutera förklaringen efter varje svar. Testet är frivilligt och tar cirka två minuter. Avsluta med frågor.';
  original[9].querySelector('[data-action="restart"]').textContent = 'Börja om redovisningen';
  document.querySelector('.slide-meta').textContent = 'Lagtext · ordalydelse · syfte · modern praxis · kontrollerat 9 september 2026';
 })();
