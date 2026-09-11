@@ -181,6 +181,7 @@
   const quizAnswers = Array.from(document.querySelectorAll(".quiz-answer"));
 
   function renderQuiz() {
+    if (!evidencePrompt) return;
     const item = evidence[quizIndex];
     evidencePrompt.textContent = item.prompt;
     quizProgress.textContent = `${quizIndex + 1} av ${evidence.length}`;
@@ -218,7 +219,7 @@
   }
 
   quizAnswers.forEach(button => button.addEventListener("click", () => answerQuiz(button)));
-  quizNext.addEventListener("click", () => {
+  quizNext?.addEventListener("click", () => {
     if (quizIndex < evidence.length - 1) {
       quizIndex += 1;
       renderQuiz();

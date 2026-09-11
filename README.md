@@ -54,3 +54,6 @@ Basgrupp 4: Johan Stensson, Fredrik Karlsson, Vegard Lein och Dennis Vessman.
 # Version 1.3.0
 
 Förstasidan använder BG4–OLDBOYS-bilden. Vid hela lagtexten för 7 § finns en utfällbar förklaring av PL 24 a–24 d §§, med källa och talstöd. Hänvisningen hör till 7 §, inte 5 §. Bilden ingår i offline-stödet.
+# Version 1.3.1
+
+På BG4:s begäran har tidigare bild 5, 11 och 15 tagits bort ur presentationen. De 12 återstående bilderna och talmanuset följer samma ordning. Avslutningen hänvisar inte längre till den borttagna övningen.
