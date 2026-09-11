@@ -14,7 +14,7 @@ const textFiles = required.filter(name => name !== ".nojekyll");
 const contents = Object.fromEntries(textFiles.map(name => [name, fs.readFileSync(path.join(projectDir, name), "utf8")]));
 
 if (!contents["index.html"].includes('lang="sv"')) failures.push("HTML-språk saknas");
-if (!contents["index.html"].includes('data-version="1.3.2"')) failures.push("Versionsmarkör saknas");
+if (!contents["index.html"].includes('data-version="1.3.3"')) failures.push("Versionsmarkör saknas");
 if (!fs.existsSync(path.join(projectDir, 'assets/bg4-oldboys.png'))) failures.push('Omslagsbild saknas');
 if ((contents["index.html"].match(/class="slide(?:\s|\")/g) || []).length !== 10) failures.push("Fel antal presentationsbilder");
 if (!contents["index.html"].includes("Rättsligt underlag")) failures.push("Källpanel saknas");

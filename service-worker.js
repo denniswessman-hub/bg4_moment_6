@@ -1,5 +1,5 @@
 const CACHE_PREFIX = `tbl-5-7:${self.registration.scope}:`;
-const CACHE_NAME = `${CACHE_PREFIX}v1.3.2`;
+const CACHE_NAME = `${CACHE_PREFIX}v1.3.3`;
 const CORE_FILES = ["./", "./index.html", "./styles.css", "./speaker-notes.js", "./curriculum.js", "./app.js", "./assets/bg4-oldboys.png"];
 
 self.addEventListener("install", event => {
