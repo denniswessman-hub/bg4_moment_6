@@ -359,7 +359,6 @@
     window.open(presenterUrl, "tbl-presenter", "width=1050,height=760");
   });
 
-  document.getElementById("printButton").addEventListener("click", () => window.print());
 
   function updatePresenterView() {
     if (!isPresenter) return;
