@@ -1,6 +1,7 @@
 (() => {
  const deck = document.querySelector('.deck');
- const original = [...deck.querySelectorAll('.slide')];
+ // Source ids remain stable even when a source slide is removed.
+ const original = Object.fromEntries([...deck.querySelectorAll('.slide')].map(slide => [slide.dataset.slide, slide]));
  const notes = window.speakerNotes;
  const tbl = 'https://www.riksdagen.se/sv/dokument-och-lagar/dokument/svensk-forfattningssamling/lag-1951649-om-straff-for-vissa-trafikbrott_sfs-1951-649/';
  const p5 = 'https://www.riksdagen.se/sv/dokument-och-lagar/dokument/proposition/om-vissa-delegeringsfragor-och-regelforenkllngar_ga0334/html/';
@@ -46,10 +47,7 @@
  window.speakerNotes[11][2] = 'Sammanfatta innehåll, ordalydelse och rättsfall. Avsluta redovisningen och bjud in till frågor.';
  window.speakerNotes[10][1] = 'Fall A avgjordes av Göta hovrätt den 13 april 2022. Traktorn värderades till 500 000 kronor exklusive moms och bilen till 70 000 kronor. Den aktuella lagföringen omfattade bland annat sju grova rattfyllerier, två rattfyllerier och fem grova olovliga körningar. Detta ska skiljas från tidigare belastning: 17 registeravsnitt, huvudsakligen trafikbrott. Båda fordonen förverkades. Fall B avgjordes den 19 mars 2020. Förverkande av bilen för cirka 80 000 kronor avslogs efter en samlad bedömning. Hovrätten beaktade frågan om återtagandeförbehåll, som inte var utredd, och att personen saknade bostad, inkomst och tillgångar. Helheten avgör, inte en fast beloppsgräns.';
  window.speakerNotes[10][2] = 'Presentera omständigheterna och visa sedan utgången i varje fall. Länkarna leder till sidorna 23 respektive 24 i Åklagarmyndighetens vägledning, där domarna sammanfattas. Det är hovrättsfall, inte HD-prejudikat.';
- original[8].dataset.title = 'Frivillig bevisutmaning';
- original[8].querySelector('.eyebrow').textContent = 'Frivillig repetition efter redovisningen';
- document.getElementById('classQuizContent').append(original[8].querySelector('.slide-content'));
- window.speakerNotes[11][2] = 'Sammanfatta och klicka på Testa klassen. Låt klassen välja 5 §, 7 § eller båda för de sju uppgifterna. Diskutera förklaringen efter varje svar. Testet är frivilligt och tar cirka två minuter. Avsluta med frågor.';
+ window.speakerNotes[11][2] = 'Sammanfatta och klicka på Testa klassen i huvudfönstret. Testet öppnas direkt på bild 12 och sidan rullar till frågorna. Låt klassen välja 5 §, 7 § eller båda – sju frågor, en i taget. Diskutera förklaringen och klicka Nästa uppgift. Efter sista frågan visas resultatet. Börja om testet nollställer poängen; Till sammanfattningen döljer testet. Avsätt cirka två minuter eller längre för diskussion. Avsluta med frågor.';
  original[9].querySelector('[data-action="restart"]').textContent = 'Börja om redovisningen';
  document.querySelector('.slide-meta').textContent = 'Lagtext · ordalydelse · syfte · modern praxis · kontrollerat 9 september 2026';
 })();

@@ -4,13 +4,13 @@ En mobilanpassad klassrumspresentation för Moment 6, Basgrupp 4. Webbplatsen ä
 
 ## Innehåll
 
-- fjorton steg för seminarieredovisningen och en frivillig repetitionsövning
+- tolv presentationsbilder och ett frivilligt test direkt på bild 12
 - hela lagtexten i 5 och 7 §§, öppningsbara ordförklaringar och förarbeten
 - stegvis genomgång av 5 och 7 §§ trafikbrottslagen
 - praxisjämförelse
-- interaktiv bevisutmaning
+- sju testfrågor med förklaringar, poäng och återställning under ”Testa klassen” på sammanfattningen
 - separat presentatörsfönster med talmanus och timer
-- källpanel och utskriftsvänlig sammanfattning
+- flyttbar källpanel
 - tangentbordsstyrning, mobilanpassning och offline-stöd efter första besöket
 
 ## Testa lokalt
@@ -44,13 +44,15 @@ Den ursprungliga PowerPoint-filen ingår inte i webbpaketet och förblir oförä
 
 ## Versionsuppgift
 
-Version 1.2.0
+Version 1.4.0
 
-Seminarieversion: 14 ordinarie steg och en frivillig bevisövning. Hela 5 och 7 §§ följs av öppningsbara ordförklaringar, syfte/förarbeten och rättsfall. Talmanuset följer den nya ordningen. Planera preliminärt 18–22 minuter plus eventuell repetition och anpassa till lärarens tidsram. Uppgiften anger ingen tidsgräns. Den äldre uppgiften om cirka 11 minuter gäller föregående version.
+Seminarieversion med 12 bilder. Hela 5 och 7 §§ följs av öppningsbara ordförklaringar och rättsfall. Testet är en del av bild 12, inte en extra bild eller ett popupfönster. Talmanuset följer samma ordning. Anpassa tempot till lärarens tidsram.
 
 Basgrupp 4: Johan Stensson, Fredrik Karlsson, Vegard Lein och Dennis Vessman.
 
-Återställ svar återställer samtliga frågor, poäng, facit och öppnade förklaringar utan att byta bild. Knappen finns även i talmanusfönstret. R gör samma sak. Börja om återställer svaren och går till startbilden. Talmanuset har tidsförslag, muntliga formuleringar och separata instruktioner för varje bild. Avsätt cirka 11 minuter, längre vid diskussion.
+Återställ svar återställer samtliga frågor, poäng, facit och öppnade förklaringar utan att byta bild. Knappen finns även i talmanusfönstret. R gör samma sak. Börja om återställer svaren, döljer klasstestet och går till startbilden. Talmanuset har tidsförslag, muntliga formuleringar och separata instruktioner för varje bild.
+
+Vid publicering ska versionen uppdateras i sidans resurslänkar, versionsmarkören, offline-stödet och kontrollskriptet. De versionsbundna länkarna hindrar ny HTML från att använda äldre sparad JavaScript eller CSS. Kör `node validate.mjs` och webbläsartesterna i `tests/` före publicering.
 # Version 1.3.0
 
 Förstasidan använder BG4–OLDBOYS-bilden. Vid hela lagtexten för 7 § finns en utfällbar förklaring av PL 24 a–24 d §§, med källa och talstöd. Hänvisningen hör till 7 §, inte 5 §. Bilden ingår i offline-stödet.

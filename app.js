@@ -171,10 +171,26 @@
   ];
 
   let quizIndex = 0;
-  const classQuizDialog = document.getElementById('classQuizDialog');
-  document.getElementById('classQuizButton').addEventListener('click', () => classQuizDialog.showModal());
-  document.getElementById('classQuizClose').addEventListener('click', () => classQuizDialog.close());
-  document.getElementById('classQuizReset').addEventListener('click', () => resetQuiz());
+  const classQuizPanel = document.getElementById('classQuizPanel');
+  const classQuizButton = document.getElementById('classQuizButton');
+  function setClassQuizOpen(open, focus = true) {
+    classQuizPanel.hidden = !open;
+    classQuizButton.setAttribute('aria-expanded', String(open));
+    classQuizButton.textContent = open ? 'Dölj testet' : 'Testa klassen · 7 frågor';
+    if (!focus || isPresenter) return;
+    if (open) {
+      classQuizPanel.scrollIntoView({ block: 'start' });
+      evidencePrompt.focus({ preventScroll: true });
+    } else {
+      classQuizButton.focus();
+    }
+  }
+  classQuizButton.addEventListener('click', () => setClassQuizOpen(classQuizPanel.hidden));
+  document.getElementById('classQuizClose').addEventListener('click', () => setClassQuizOpen(false));
+  document.getElementById('classQuizReset').addEventListener('click', () => {
+    resetQuiz();
+    setClassQuizOpen(true);
+  });
   let quizScore = 0;
   let quizAnswered = false;
   const evidencePrompt = document.getElementById("evidencePrompt");
@@ -227,6 +243,7 @@
     if (quizIndex < evidence.length - 1) {
       quizIndex += 1;
       renderQuiz();
+      evidencePrompt.focus();
       return;
     }
     evidencePrompt.textContent = `Klart: ${quizScore} av ${evidence.length} rätt`;
@@ -236,30 +253,13 @@
     quizFeedback.hidden = false;
     quizNext.hidden = true;
     quizAnswers.forEach(answer => { answer.disabled = true; answer.classList.remove("is-correct", "is-wrong"); });
+    evidencePrompt.focus();
   });
 
   function resetQuiz() {
     quizIndex = 0;
     quizScore = 0;
     renderQuiz();
-  }
-
-  function resetCurrentInteraction() {
-    const slide = slides[currentSlide];
-    resetPolls(slide);
-
-    if (currentSlide === 3) {
-      revealedRequisites = 1;
-      updateRequisites();
-    }
-    if (currentSlide === 6) {
-      slide.querySelectorAll(".step-card").forEach(card => card.setAttribute("aria-expanded", "false"));
-    }
-    if (currentSlide === 7) {
-      slide.querySelectorAll(".case-reveal").forEach(button => button.setAttribute("aria-expanded", "false"));
-    }
-    if (currentSlide === 8) resetQuiz();
-    showToast("Aktuell bild har återställts");
   }
 
   function resetAll(notify = true) {
@@ -285,7 +285,7 @@
 
     const action = event.target.closest("[data-action]")?.dataset.action;
     if (action === "next") move(1);
-    if (action === "restart") { resetAll(); setSlide(0); }
+    if (action === "restart") { resetAll(); setClassQuizOpen(false, false); setSlide(0); }
   });
 
   previousButton.addEventListener("click", () => move(-1));
@@ -327,7 +327,8 @@
   window.addEventListener('resize', resetSourcePosition);
   document.querySelector("[data-dialog-close]").addEventListener("click", () => sourceDialog.close());
   sourceDialog.addEventListener("click", event => {
-    if (event.target === sourceDialog) sourceDialog.close();
+    const box = sourceDialog.getBoundingClientRect();
+    if (event.target === sourceDialog && (event.clientX < box.left || event.clientX > box.right || event.clientY < box.top || event.clientY > box.bottom)) sourceDialog.close();
   });
 
   document.getElementById("fullscreenButton").addEventListener("click", async () => {
@@ -452,7 +453,13 @@
 
   document.addEventListener("keydown", event => {
     if (event.ctrlKey || event.metaKey || event.altKey || event.target.closest('input, textarea, select, [contenteditable]')) return;
-    if (sourceDialog.open || classQuizDialog.open) return;
+    if (sourceDialog.open) return;
+    // Let the inline exercise keep keyboard focus without changing slides.
+    if (event.target.closest('#classQuizPanel')) {
+      if (event.key === 'Escape') setClassQuizOpen(false);
+      if (event.key.toLowerCase() === 'r') resetAll();
+      return;
+    }
     const interactive = event.target.closest("button, a, input, select, textarea");
     if (interactive && (event.key === " " || event.key === "Enter")) return;
 
@@ -475,6 +482,6 @@
   setSlide(isPresenter ? currentSlide : readInitialSlide(), { broadcast: !isPresenter });
 
   if ("serviceWorker" in navigator && window.location.protocol.startsWith("http")) {
-    window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js").catch(() => {}));
+    window.addEventListener("load", () => navigator.serviceWorker.register("./service-worker.js", { updateViaCache: 'none' }).catch(() => {}));
   }
 })();

@@ -14,9 +14,16 @@ const textFiles = required.filter(name => name !== ".nojekyll");
 const contents = Object.fromEntries(textFiles.map(name => [name, fs.readFileSync(path.join(projectDir, name), "utf8")]));
 
 if (!contents["index.html"].includes('lang="sv"')) failures.push("HTML-språk saknas");
-if (!contents["index.html"].includes('data-version="1.3.5"')) failures.push("Versionsmarkör saknas");
+const version = '1.4.0';
+if (!contents["index.html"].includes(`data-version="${version}"`)) failures.push("Versionsmarkör saknas");
+for (const name of ['app.js', 'curriculum.js', 'speaker-notes.js', 'styles.css']) {
+  if (!contents['index.html'].includes(`./${name}?v=${version}`)) failures.push(`Versionsbunden resurs saknas: ${name}`);
+}
+if (!contents['service-worker.js'].includes(`const VERSION = '${version}'`)) failures.push('Offline-version skiljer sig');
 if (!fs.existsSync(path.join(projectDir, 'assets/bg4-oldboys.png'))) failures.push('Omslagsbild saknas');
-if ((contents["index.html"].match(/class="slide(?:\s|\")/g) || []).length !== 10) failures.push("Fel antal presentationsbilder");
+if ((contents["index.html"].match(/class="slide(?:\s|\")/g) || []).length !== 9) failures.push("Fel antal källsektioner");
+if (contents['index.html'].includes('classQuizDialog') || contents['app.js'].includes('classQuizDialog')) failures.push('Testet ligger kvar i en dialog');
+if (!contents['index.html'].includes('aria-controls="classQuizPanel"')) failures.push('Testknappens koppling saknas');
 if (!contents["index.html"].includes("Rättsligt underlag")) failures.push("Källpanel saknas");
 if (!contents["index.html"].includes("presenterDashboard")) failures.push("Presentatörsläge saknas");
 if (!contents["app.js"].includes("serviceWorker.register")) failures.push("Offline-registrering saknas");
@@ -27,7 +34,7 @@ for (const [name, content] of Object.entries(contents)) {
   if (/turn\d+(search|view|fetch)\d+/i.test(content)) failures.push(`Internt käll-id i ${name}`);
 }
 
-const localReferences = [...contents["index.html"].matchAll(/(?:href|src)="\.\/([^"#?]+)"/g)].map(match => match[1]);
+const localReferences = [...contents["index.html"].matchAll(/(?:href|src)="\.\/([^"#]+)"/g)].map(match => match[1].split('?')[0]);
 for (const reference of localReferences) {
   if (!fs.existsSync(path.join(projectDir, reference))) failures.push(`Trasig lokal referens: ${reference}`);
 }
@@ -40,7 +47,7 @@ for (const reference of [...contents["index.html"].matchAll(/aria-labelledby="([
   if (!ids.includes(reference)) failures.push(`Trasig aria-labelledby: ${reference}`);
 }
 
-for (const reference of [...contents["app.js"].matchAll(/getElementById\("([^"]+)"\)/g)].map(match => match[1])) {
+for (const reference of [...contents["app.js"].matchAll(/getElementById\(["']([^"']+)["']\)/g)].map(match => match[1])) {
   if (!ids.includes(reference)) failures.push(`JavaScript söker saknat id: ${reference}`);
 }
 
@@ -55,4 +62,4 @@ if (failures.length) {
   process.exit(1);
 }
 
-console.log(`PASS: ${required.length} filer, 10 bilder, källpanel, presentatörsläge, offline-stöd och lokala länkar.`);
+console.log(`PASS: ${required.length} filer, versionsbundna resurser, inbyggt klasstest, källpanel och lokala länkar. Kontrollera de 12 färdiga bilderna med webbläsartestet.`);
